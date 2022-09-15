@@ -24,10 +24,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+tasks {
+    test {
+        useJUnitPlatform()
+    }
 }
 
 tasks.withType<KotlinCompile> {
