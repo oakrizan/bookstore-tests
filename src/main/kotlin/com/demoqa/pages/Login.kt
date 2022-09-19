@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component
 class Login {
     //General
     private val header: SelenideElement = `$`(".main-header")
-    private val wrapper: SelenideElement = `$`("#userForm")
     private val error: SelenideElement = `$`("#output #name")
 
     //Fields
@@ -24,9 +23,15 @@ class Login {
     private val invalidsCss: String = ".is-invalid"
 
     fun waitWhileReady() {
-        wrapper.should(exist);
         header.shouldBe(visible).shouldHave(text("Login"))
         usernameField.shouldBe(visible, enabled)
         passwordField.shouldBe(visible, enabled)
+    }
+
+    fun newUserButtonClick() {
+        waitWhileReady()
+        newUserBtn
+            .shouldBe(visible, enabled)
+            .click()
     }
 }
