@@ -1,1 +1,1 @@
-rootProject.name = "bookstore-tests"
+rootProject.name = "ui-tests-demo"

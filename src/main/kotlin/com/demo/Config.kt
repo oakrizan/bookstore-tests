@@ -1,4 +1,4 @@
-package com.demoqa
+package com.demo
 
 import org.springframework.boot.SpringBootConfiguration
 import org.springframework.context.annotation.ComponentScan

@@ -41,15 +41,41 @@ buildscript {
         classpath("com.diffplug.spotless:spotless-plugin-gradle:6.11.0")
     }
 }
+configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+    format("misc") {
+        target("*/src/**/*.kt")
+        endWithNewline()
+        trimTrailingWhitespace()
+    }
+    kotlin {
+        target("*/src/**/*.kt")
+        ktlint("0.47.1")
+    }
+    kotlinGradle {
+        target("**/*gradle.kts")
+        ktlint("0.47.1")
+    }
+}
 
 tasks {
     test {
         useJUnitPlatform()
         testLogging {
-            events( "passed", "skipped", "failed" )
             showExceptions = true
             exceptionFormat = FULL
             showStackTraces = true
+        }
+
+        if (project.hasProperty("browser")) {
+            systemProperty("browser", project.property("browser") ?: "chrome")
+        }
+        systemProperty("chromeoptions.prefs", "credentials_enable_service=false,profile.password_manager_enabled=false")
+//        systemProperty("wdm.chromeDriverVersion", "80")
+        systemProperty("selenide.headless", "false")
+        systemProperty("selenide.browserSize", "2100x1080")
+        if (project.hasProperty("grid")) {
+            systemProperty("browser.remote", "true")
+            systemProperty("selenide.remote", "http://${project.property("grid")}:4444/wd/hub")
         }
     }
 }
