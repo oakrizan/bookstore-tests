@@ -1,11 +1,13 @@
 package com.demo.pages
 
-import com.codeborne.selenide.Condition.*
+import com.codeborne.selenide.Condition.text
+import com.codeborne.selenide.Condition.visible
 import com.codeborne.selenide.Selectors.byText
 import com.codeborne.selenide.Selenide.`$`
 import com.codeborne.selenide.SelenideElement
 import com.demo.objects.user.ClientData
 import com.demo.pages.common.DatePicker
+import io.qameta.allure.Step
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.time.LocalDate
@@ -47,12 +49,14 @@ class Registration {
     @Autowired
     private lateinit var datePicker: DatePicker
 
+
     fun `wait while ready`() {
         header.shouldBe(visible)
             .shouldHave(text(HEADER_TEXT))
         stepBar.shouldBe(visible)
     }
 
+    @Step("Provide data for 1st step")
     fun `do step 1`(client: ClientData) {
         `validate step readiness`(STEP_1_TEXT)
         username.`val`(client.username)
@@ -62,6 +66,7 @@ class Registration {
         next.click()
     }
 
+    @Step("Provide data for 2nd step")
     fun `do step 2`(client: ClientData) {
         `validate step readiness`(STEP_2_TEXT)
         firstname.`val`(client.firstname)
@@ -73,6 +78,7 @@ class Registration {
         next.click()
     }
 
+    @Step("Provide data for 2nd step")
     fun `do step 3`(client: ClientData) {
         `validate step readiness`(STEP_3_TEXT)
         displayName.`val`(client.username)

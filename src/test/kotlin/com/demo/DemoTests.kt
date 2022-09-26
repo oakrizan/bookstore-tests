@@ -5,13 +5,15 @@ import com.demo.objects.user.ClientData
 import com.demo.pages.Registration
 import com.demo.pages.Registration.Companion.SUCCESS_REGISTRATION_TEXT
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest(classes = [Config::class])
-class Tests() {
+@DisplayName("Demo Tests")
+class DemoTests() {
     @Autowired
     private lateinit var registration: Registration
     @Autowired
@@ -23,14 +25,18 @@ class Tests() {
     lateinit var url: String
 
     @Test
-    fun `test`() {
+    @DisplayName("New client registration")
+    fun `register new client`() {
         var newClient: ClientData = clientDTO.adultClient()
 
-        url = "https://demo.wpeverest.com/user-registration/multi-step-form/"
         session.setupWith(url)
         registration.`do step 1`(newClient)
         registration.`do step 2`(newClient)
         registration.`do step 3`(newClient)
-        assertThat(registration.`registration success message`().text().contentEquals(SUCCESS_REGISTRATION_TEXT)).isTrue()
+        assertThat(
+            registration.`registration success message`().text()
+                .contentEquals(SUCCESS_REGISTRATION_TEXT)
+        )
+            .isTrue
     }
 }

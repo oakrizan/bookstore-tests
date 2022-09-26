@@ -16,7 +16,7 @@ class ClientDTO {
             username = "janeDoe$id",
             email = "janeDoe$id@email.com",
             password = id,
-            firstname = "Jane",
+            firstname = "John",
             lastname = "Doe",
             gender = "male",
             dateOfBirth = faker.person.birthDate(45),
