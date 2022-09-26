@@ -3,8 +3,6 @@ package com.demo.objects.user
 import io.github.serpro69.kfaker.Faker
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
-import java.time.LocalDateTime.now
-import kotlin.random.Random
 
 @Component
 
@@ -22,9 +20,9 @@ class ClientDTO {
             lastname = "Doe",
             gender = "male",
             dateOfBirth = faker.person.birthDate(45),
-            phoneNumber = "45516895",
-            country = faker.address.country(),
-            aboutYourselfText = faker.bigBangTheory.quotes()
+            phoneNumber = "4551689500",
+            country = "Canada",
+            aboutText = faker.bigBangTheory.quotes()
         )
         logger.info { "New user data: $clientData" }
         return clientData
