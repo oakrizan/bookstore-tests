@@ -21,8 +21,8 @@ class Tests() {
 
     @Test
     fun `test`() {
-//        Configuration.browserSize = "2100x1080"
+        url = "https://demo.wpeverest.com/user-registration/multi-step-form/"
         session.setupWith(url)
-
+        registration.`wait while ready`()
     }
 }
