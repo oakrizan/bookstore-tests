@@ -69,8 +69,7 @@ class Registration {
         `gender element`(client.gender).click()
         phoneNumber.`val`(client.phoneNumber)
         `select date`(client.dateOfBirth)
-        country.click()
-        `$`(byText(client.country)).click()
+        `select country`(client.country)
         next.click()
     }
 
@@ -83,6 +82,8 @@ class Registration {
     }
 
     fun `registration success message`(): SelenideElement {
+        `wait while ready`()
+        successMessage.shouldBe(visible)
         return successMessage
     }
 
@@ -102,5 +103,10 @@ class Registration {
         datePicker.`select year`(date.year.toString())
         datePicker.`select month`(date.month.toString())
         datePicker.`select day`(date.dayOfMonth.toString())
+    }
+
+    private fun `select country`(countryName: String) {
+        country.click()
+        `$`(byText(countryName)).click()
     }
 }
