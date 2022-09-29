@@ -1,4 +1,4 @@
-package com.demo.objects.user
+package com.demo.objects.client
 
 import java.time.LocalDate
 
@@ -12,5 +12,5 @@ data class ClientData(
     val phoneNumber: String,
     val dateOfBirth: LocalDate,
     val country: String,
-    val aboutText: String
+    val aboutYou: String
 )

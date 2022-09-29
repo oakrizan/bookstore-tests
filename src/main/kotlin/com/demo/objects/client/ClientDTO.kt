@@ -1,4 +1,4 @@
-package com.demo.objects.user
+package com.demo.objects.client
 
 import io.github.serpro69.kfaker.Faker
 import mu.KotlinLogging
@@ -18,11 +18,11 @@ class ClientDTO {
             password = id,
             firstname = "John",
             lastname = "Doe",
-            gender = "male",
+            gender = "Male",
             dateOfBirth = faker.person.birthDate(45),
             phoneNumber = "4551689500",
             country = "Canada",
-            aboutText = faker.bigBangTheory.quotes()
+            aboutYou = faker.bigBangTheory.quotes()
         )
         logger.info { "New user data: $clientData" }
         return clientData

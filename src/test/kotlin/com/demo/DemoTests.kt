@@ -1,9 +1,10 @@
 package com.demo
 
-import com.demo.objects.user.ClientDTO
-import com.demo.objects.user.ClientData
-import com.demo.pages.Registration
-import com.demo.pages.Registration.Companion.SUCCESS_REGISTRATION_TEXT
+import com.demo.objects.client.ClientDTO
+import com.demo.objects.client.ClientData
+import com.demo.pages.registration.RegistrationStep1
+import com.demo.pages.registration.RegistrationStep2
+import com.demo.pages.registration.RegistrationStep3
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -15,11 +16,15 @@ import org.springframework.boot.test.context.SpringBootTest
 @DisplayName("Demo Tests")
 class DemoTests() {
     @Autowired
-    private lateinit var registration: Registration
-    @Autowired
     private lateinit var clientDTO: ClientDTO
     @Autowired
     private lateinit var session: SessionManager
+    @Autowired
+    private lateinit var firstStep: RegistrationStep1
+    @Autowired
+    private lateinit var secondStep: RegistrationStep2
+    @Autowired
+    private lateinit var thirdStep: RegistrationStep3
 
     @Value("\${url}")
     lateinit var url: String
@@ -30,13 +35,9 @@ class DemoTests() {
         var newClient: ClientData = clientDTO.adultClient()
 
         session.setupWith(url)
-        registration.`do step 1`(newClient)
-        registration.`do step 2`(newClient)
-        registration.`do step 3`(newClient)
-        assertThat(
-            registration.`registration success message`().text()
-                .contentEquals(SUCCESS_REGISTRATION_TEXT)
-        )
-            .isTrue
+        firstStep.`do step 1`(newClient)
+        secondStep.`do step 2`(newClient)
+        thirdStep.`do step 3`(newClient)
+        assertThat(thirdStep.`is success message visible`()).isTrue
     }
 }

@@ -7,6 +7,7 @@ import com.codeborne.selenide.Selenide.`$`
 import com.codeborne.selenide.Selenide.`$$`
 import com.codeborne.selenide.SelenideElement
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 
 @Component
 class DatePicker {
@@ -34,26 +35,27 @@ class DatePicker {
         dayContainer.shouldBe(visible)
     }
 
-    fun `select year`(year: String) {
+    fun `select year`(date: LocalDate) {
+        val year = date.year.toString()
         `validate year picker readiness`()
         while (yearPicker.`$`(currentYear).`val`()?.compareTo(year) != 0) {
             yearPicker.`$`(previousYear).click()
         }
     }
 
-    fun `select month`(month: String) {
+    fun `select month`(date: LocalDate) {
         `wait while ready`()
         monthPicker.click()
-        `$`(byText(month.lowercase().replaceFirstChar(Char::titlecase)))
+        `$`(byText(date.month.toString().lowercase().replaceFirstChar(Char::titlecase)))
             .click()
     }
 
-    fun `select day`(day: String) {
+    fun `select day`(date: LocalDate) {
         `wait while ready`()
         dayCollection
             .filterNot { it.has(cssClass(previousMonthDay)) || it.has(cssClass(nextMonthDay)) }
             .first {
-                it.text().contentEquals(day)
+                it.text().contentEquals(date.dayOfMonth.toString())
             }
             .click()
     }
