@@ -24,7 +24,7 @@ class RegistrationStep3 {
     @Autowired
     private lateinit var registration: RegistrationCommon
 
-    @Step("Provide data for 2nd step")
+    @Step("Provide data for 3rd step")
     fun `do step 3`(client: ClientData) {
         `wait while ready`()
         `fill display name field`(client.username)
